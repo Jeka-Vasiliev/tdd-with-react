@@ -14,4 +14,16 @@ describe("SearchField", () => {
 
     expect(props.onSearch).toBeCalled();
   });
+
+  it("trim empty strings", () => {
+    const props = {
+      term: "",
+      onSearch: jest.fn(),
+    };
+
+    render(<SearchField {...props} />);
+    userEvent.type(screen.getByRole("textbox"), "   ");
+
+    expect(props.onSearch).not.toHaveBeenCalled();
+  });
 });
