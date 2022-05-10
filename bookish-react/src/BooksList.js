@@ -10,7 +10,7 @@ export function BooksList({ books, loading, error }) {
   return (
     <div data-test="book-list">
       {books.map((book) => (
-        <div className="book-item">
+        <div className="book-item" key={book.id}>
           <h2>{book.name}</h2>
         </div>
       ))}
