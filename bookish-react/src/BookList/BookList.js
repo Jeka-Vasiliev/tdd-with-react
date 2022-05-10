@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function BookList({ books, loading, error }) {
   if (loading) {
     return <p>Loading...</p>;
@@ -12,7 +14,7 @@ export function BookList({ books, loading, error }) {
       {books.map((book) => (
         <div className="book-item" key={book.id}>
           <h2>{book.name}</h2>
-          <a href={`/books/${book.id}`}>View Details</a>
+          <Link to={`/books/${book.id}`}>View Details</Link>
         </div>
       ))}
     </div>

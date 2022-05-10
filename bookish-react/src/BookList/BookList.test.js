@@ -1,5 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { BookList } from "./BookList";
+import { MemoryRouter } from "react-router-dom";
+
+const renderWithRouter = (component) => {
+  return render(component, { wrapper: MemoryRouter });
+};
 
 describe("BookList", () => {
   it("loading", () => {
@@ -7,7 +12,7 @@ describe("BookList", () => {
       loading: true,
     };
 
-    render(<BookList {...props} />);
+    renderWithRouter(<BookList {...props} />);
 
     expect(screen.getByText(/Loading/)).toBeInTheDocument();
   });
@@ -17,7 +22,7 @@ describe("BookList", () => {
       error: true,
     };
 
-    render(<BookList {...props} />);
+    renderWithRouter(<BookList {...props} />);
 
     expect(screen.getByText(/Error/)).toBeInTheDocument();
   });
@@ -29,7 +34,7 @@ describe("BookList", () => {
         { id: 2, name: "Domain-driven design" },
       ],
     };
-    render(<BookList {...props} />);
+    renderWithRouter(<BookList {...props} />);
 
     expect(screen.getByText(/Refactoring/)).toBeInTheDocument();
     expect(screen.getByText(/Domain-driven design/)).toBeInTheDocument();
