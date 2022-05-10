@@ -3,6 +3,10 @@ export function BooksList({ books, loading, error }) {
     return <p>Loading...</p>;
   }
 
+  if (error) {
+    return <p>Error...</p>;
+  }
+
   return (
     <div data-test="book-list">
       {books.map((book) => (
