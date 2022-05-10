@@ -1,7 +1,7 @@
 import { BookList } from "./BookList";
 import { useRemoteService } from "../hooks";
-import { TextField } from "@material-ui/core";
 import { useEffect, useState } from "react";
+import { SearchField } from "./SearchField";
 
 export function BookListContainer() {
   const { data, loading, error, setUrl } = useRemoteService("http://localhost:8080/books", []);
@@ -10,18 +10,11 @@ export function BookListContainer() {
   useEffect(() => {
     setUrl(`http://localhost:8080/books?q=${term}`);
   }, [term, setUrl]);
+  const onSearch = (e) => setTerm(e.target.value);
 
   return (
     <>
-      <TextField
-        label="search"
-        value={term}
-        onChange={(e) => setTerm(e.target.value)}
-        data-testid="search"
-        role="search"
-        margin="normal"
-        variant="outlined"
-      />
+      <SearchField term={term} onSearch={onSearch} />
       <BookList books={data} loading={loading} error={error} />
     </>
   );
