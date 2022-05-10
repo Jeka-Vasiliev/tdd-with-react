@@ -1,8 +1,12 @@
+const getDescriptionFor = (book) => {
+  return book.description ? book.description : book.name;
+};
+
 export function BookDetail({ book }) {
   return (
     <div className="book-detail">
       <h2 className="book-title">{book.name}</h2>
-      <p className="book-description">{book.description ? book.description : book.name}</p>
+      <p className="book-description">{getDescriptionFor(book)}</p>
     </div>
   );
 }
