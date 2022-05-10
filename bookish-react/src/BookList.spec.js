@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { BooksList } from "./BooksList";
 
 describe("BookList", () => {
@@ -7,10 +7,9 @@ describe("BookList", () => {
       loading: true,
     };
 
-    const { container } = render(<BooksList {...props} />);
-    const content = container.querySelector("p");
+    render(<BooksList {...props} />);
 
-    expect(content.innerHTML).toContain("Loading");
+    expect(screen.getByText(/Loading/)).toBeInTheDocument();
   });
 
   it("error", () => {
@@ -18,10 +17,9 @@ describe("BookList", () => {
       error: true,
     };
 
-    const { container } = render(<BooksList {...props} />);
-    const content = container.querySelector("p");
+    render(<BooksList {...props} />);
 
-    expect(content.innerHTML).toContain("Error");
+    expect(screen.getByText(/Error/)).toBeInTheDocument();
   });
 
   it("render books", () => {
@@ -31,9 +29,9 @@ describe("BookList", () => {
         { id: 2, name: "Domain-driven design" },
       ],
     };
-    const { container } = render(<BooksList {...props} />);
-    const titles = [...container.querySelectorAll("h2")].map((h) => h.innerHTML);
+    render(<BooksList {...props} />);
 
-    expect(titles).toEqual(["Refactoring", "Domain-driven design"]);
+    expect(screen.getByText(/Refactoring/)).toBeInTheDocument();
+    expect(screen.getByText(/Domain-driven design/)).toBeInTheDocument();
   });
 });
