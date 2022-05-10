@@ -4,9 +4,11 @@ const getDescriptionFor = (book) => {
 
 export function BookDetail({ book }) {
   return (
-    <div className="book-detail">
+    <article className="book-detail">
       <h2 className="book-title">{book.name}</h2>
-      <p className="book-description">{getDescriptionFor(book)}</p>
-    </div>
+      <p data-testid="description" className="book-description">
+        {getDescriptionFor(book)}
+      </p>
+    </article>
   );
 }
