@@ -1,4 +1,8 @@
-export function BooksList({ books }) {
+export function BooksList({ books, loading, error }) {
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div data-test="book-list">
       {books.map((book) => (
