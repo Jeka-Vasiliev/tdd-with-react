@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { Grid, CardActionArea, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import { useStyles } from "../hooks";
 
 export function BookList({ books, loading, error }) {
+  const classes = useStyles();
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -10,13 +14,28 @@ export function BookList({ books, loading, error }) {
   }
 
   return (
-    <div data-test="book-list">
-      {books.map((book) => (
-        <div className="book-item" key={book.id}>
-          <h2>{book.name}</h2>
-          <Link to={`/books/${book.id}`}>View Details</Link>
-        </div>
-      ))}
+    <div data-test="book-list" className={classes.root}>
+      <Grid container spacing={3}>
+        {books.map((book) => (
+          <Grid item xs={4} sm={4} key={book.id} className="book-item">
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2" className={classes.name}>
+                  {book.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p" className={classes.description}>
+                  {book.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary">
+                <Link to={`/books/${book.id}`}>View Details</Link>
+              </Button>
+            </CardActions>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
