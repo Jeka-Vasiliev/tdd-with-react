@@ -6,6 +6,8 @@ const router = serverFactory.router(path.join(__dirname, "db.json"));
 const middlewares = serverFactory.defaults();
 
 server.use(async (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+
   if (req.method === "DELETE" && req.query["_cleanup"]) {
     console.log(`DELETE`);
 
