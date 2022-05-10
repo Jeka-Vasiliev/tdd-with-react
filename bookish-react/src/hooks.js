@@ -2,25 +2,25 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export function useRemoteService(url, initialData) {
-  const [books, setBooks] = useState(initialData);
+  const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchBooks = async () => {
+    const fetchData = async () => {
       setError(false);
       setLoading(true);
       try {
         const result = await axios.get(url);
-        setBooks(result.data);
+        setData(result.data);
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-    fetchBooks();
-  }, []);
+    fetchData();
+  }, [url]);
 
-  return { books, loading, error };
+  return { data, loading, error };
 }
