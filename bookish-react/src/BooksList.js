@@ -12,6 +12,7 @@ export function BooksList({ books, loading, error }) {
       {books.map((book) => (
         <div className="book-item" key={book.id}>
           <h2>{book.name}</h2>
+          <a href={`/books/${book.id}`}>View Details</a>
         </div>
       ))}
     </div>
