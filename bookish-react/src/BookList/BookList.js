@@ -1,4 +1,4 @@
-export function BooksList({ books, loading, error }) {
+export function BookList({ books, loading, error }) {
   if (loading) {
     return <p>Loading...</p>;
   }

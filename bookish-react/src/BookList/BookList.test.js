@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { BooksList } from "./BooksList";
+import { BookList } from "./BookList";
 
 describe("BookList", () => {
   it("loading", () => {
@@ -7,7 +7,7 @@ describe("BookList", () => {
       loading: true,
     };
 
-    render(<BooksList {...props} />);
+    render(<BookList {...props} />);
 
     expect(screen.getByText(/Loading/)).toBeInTheDocument();
   });
@@ -17,7 +17,7 @@ describe("BookList", () => {
       error: true,
     };
 
-    render(<BooksList {...props} />);
+    render(<BookList {...props} />);
 
     expect(screen.getByText(/Error/)).toBeInTheDocument();
   });
@@ -29,7 +29,7 @@ describe("BookList", () => {
         { id: 2, name: "Domain-driven design" },
       ],
     };
-    render(<BooksList {...props} />);
+    render(<BookList {...props} />);
 
     expect(screen.getByText(/Refactoring/)).toBeInTheDocument();
     expect(screen.getByText(/Domain-driven design/)).toBeInTheDocument();
