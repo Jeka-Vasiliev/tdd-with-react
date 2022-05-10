@@ -3,7 +3,7 @@
 import axios from "axios";
 
 describe("Bookish application", () => {
-  before(async () => {
+  before(() => {
     return axios.delete("http://localhost:8080/books?_cleanup=true").catch(() => {});
   });
   afterEach(() => {
@@ -40,6 +40,14 @@ describe("Bookish application", () => {
     cy.visit("http://localhost:3000/");
     cy.get("div.book-item").contains("View Details").eq(0).click();
     cy.url().should("include", "/books/1");
-    cy.get('h2.book-title').contains('Refactoring');
+    cy.get("h2.book-title").contains("Refactoring");
+  });
+
+  it("Searches for a title", () => {
+    cy.visit("http://localhost:3000/");
+    cy.get("div.book-item").should("have.length", 3);
+    cy.get("[data-testid=search] input").type("design");
+    cy.get("div.book-item").should("have.length", 1);
+    cy.get("div.book-item").eq(0).contains("Domain-driven design");
   });
 });

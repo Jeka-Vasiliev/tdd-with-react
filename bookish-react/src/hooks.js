@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 
-export function useRemoteService(url, initialData) {
+export function useRemoteService(initialUrl, initialData) {
   const [data, setData] = useState(initialData);
+  const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -23,7 +24,7 @@ export function useRemoteService(url, initialData) {
     fetchData();
   }, [url]);
 
-  return { data, loading, error };
+  return { data, loading, error, setUrl };
 }
 
 export const useStyles = makeStyles((theme) => ({
