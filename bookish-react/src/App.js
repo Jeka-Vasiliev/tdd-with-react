@@ -6,10 +6,21 @@ import { BooksList } from "./BooksList";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     const fetchBooks = async () => {
-      const result = await axios.get("http://localhost:8080/books");
-      setBooks(result.data);
+      setError(false);
+      setLoading(true);
+      try {
+        const result = await axios.get("http://localhost:8080/books");
+        setBooks(result.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchBooks();
   }, []);
