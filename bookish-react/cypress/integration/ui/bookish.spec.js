@@ -25,7 +25,7 @@ const checkBookList = () => {
 };
 
 const gotoNthBookInTheList = (bookNo) => {
-  cy.get("div.book-item").contains("View Details").eq(0).click();
+  cy.get("div.book-item").contains("View Details").eq(bookNo).click();
 };
 
 const checkBookDetailWith = (url, title) => {
@@ -42,11 +42,11 @@ const performSearch = (term) => {
 };
 
 describe("Bookish application", () => {
-  before(() => {
-    return axios.delete("http://localhost:8080/books?_cleanup=true").catch(() => {});
+  before(async () => {
+    await axios.delete("http://localhost:8080/books?_cleanup=true");
   });
-  afterEach(() => {
-    return axios.delete("http://localhost:8080/books?_cleanup=true").catch(() => {});
+  afterEach(async () => {
+    await axios.delete("http://localhost:8080/books?_cleanup=true");
   });
   beforeEach(async () => {
     const books = [
