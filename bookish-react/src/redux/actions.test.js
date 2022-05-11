@@ -31,4 +31,16 @@ describe("BookListContainer related actions", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it("Fetch data with error", () => {
+    axios.get = jest.fn().mockImplementation(() => Promise.reject({ message: "Something went wrong" }));
+    const expectedActions = [
+      { type: "FETCH_BOOKS_PENDING" },
+      { type: "FETCH_BOOKS_FAILED", err: "Something went wrong" },
+    ];
+    const store = mockStore({ books: [] });
+    return store.dispatch(fetchBooks("")).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });
