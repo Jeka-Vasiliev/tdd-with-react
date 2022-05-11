@@ -28,3 +28,13 @@ it("renders", async () => {
   expect(book1).toBeInTheDocument();
   expect(book2).toBeInTheDocument();
 });
+
+it("something went wrong", async () => {
+  const mock = new MockAdapter(axios);
+  mock.onGet("http://localhost:8080/books?q=").networkError();
+
+  renderWithProvider(<BookListContainer />);
+
+  const error = await screen.findByText("Error...");
+  expect(error).toBeInTheDocument();
+});

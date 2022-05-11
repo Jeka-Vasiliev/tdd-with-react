@@ -6,6 +6,8 @@ const reducer = (state = { books: [], loading: false, term: "" }, action) => {
       return { ...state, loading: true };
     case types.FETCH_BOOKS_SUCCESS:
       return { ...state, books: action.books, loading: false };
+    case types.FETCH_BOOKS_FAILED:
+      return { ...state, loading: false, error: true };
     case types.SET_SEARCH_TERM:
       return { ...state, term: action.term };
     default:
