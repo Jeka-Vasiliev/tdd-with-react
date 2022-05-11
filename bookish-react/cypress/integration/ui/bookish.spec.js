@@ -24,10 +24,6 @@ const checkBookList = () => {
   checkBookListWith(["Refactoring", "Domain-driven design", "Building Microservices"]);
 };
 
-const checkSearchedResult = () => {
-  checkBookListWith(["Domain-driven design"]);
-};
-
 const gotoNthBookInTheList = (bookNo) => {
   cy.get("div.book-item").contains("View Details").eq(0).click();
 };
