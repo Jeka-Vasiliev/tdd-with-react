@@ -19,7 +19,7 @@ describe("BookListContainer related actions", () => {
     expect(action).toEqual(expected);
   });
 
-  it("Fetches data successfully", () => {
+  it("Fetches data successfully", async () => {
     const books = [
       { id: 1, name: "Refactoring" },
       { id: 2, name: "Domain-driven design" },
@@ -27,32 +27,34 @@ describe("BookListContainer related actions", () => {
     axios.get = jest.fn().mockImplementation(() => Promise.resolve({ data: books }));
     const expectedActions = [{ type: "FETCH_BOOKS_PENDING" }, { type: "FETCH_BOOKS_SUCCESS", books }];
     const store = mockStore({ books: [] });
-    return store.dispatch(fetchBooks("")).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+    await store.dispatch(fetchBooks(""));
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it("Fetch data with error", () => {
+  it("Fetch data with error", async () => {
     axios.get = jest.fn().mockImplementation(() => Promise.reject({ message: "Something went wrong" }));
     const expectedActions = [
       { type: "FETCH_BOOKS_PENDING" },
       { type: "FETCH_BOOKS_FAILED", err: "Something went wrong" },
     ];
     const store = mockStore({ books: [] });
-    return store.dispatch(fetchBooks("")).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
+
+    await store.dispatch(fetchBooks(""));
+
+    expect(store.getActions()).toEqual(expectedActions);
   });
 
-  it("Search data with term", () => {
+  it("Search data with term", async () => {
     const books = [
       { id: 1, name: "Refactoring" },
       { id: 2, name: "Domain-driven design" },
     ];
     axios.get = jest.fn().mockImplementation(() => Promise.resolve({ data: books }));
     const store = mockStore({ books: [] });
-    return store.dispatch(fetchBooks("domain")).then(() => {
-      expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/books?q=domain");
-    });
+
+    await store.dispatch(fetchBooks("domain"));
+
+    expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/books?q=domain");
   });
 });
