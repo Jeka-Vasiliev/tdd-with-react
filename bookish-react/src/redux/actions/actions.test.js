@@ -2,7 +2,7 @@ import { setSearchTerm, fetchBooks } from "./actions";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import axios from "axios";
-import * as types from "./types";
+import * as types from "../types";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
