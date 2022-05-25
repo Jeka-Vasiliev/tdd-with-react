@@ -5,4 +5,4 @@ export const bookListSelector = createSelector(
   (books, loading, error) => ({ books, loading, error }),
 );
 
-export const termSelector = state => state.term
+export const termSelector = (state) => state.term;

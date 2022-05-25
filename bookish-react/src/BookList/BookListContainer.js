@@ -18,7 +18,7 @@ export function BookListContainer() {
     dispatch(actions.fetchBooks());
   };
   const { books, loading, error } = useSelector(selectors.bookListSelector);
-  const term = useSelector((state) => state.term);
+  const term = useSelector(selectors.termSelector);
 
   return (
     <>
