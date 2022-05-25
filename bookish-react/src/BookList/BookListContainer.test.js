@@ -1,18 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import { BookListContainer } from "./BookListContainer";
-import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import store from "../store";
-import { MemoryRouter } from "react-router-dom";
-
-const renderWithProvider = (component) => {
-  render(
-    <Provider store={store}>
-      <MemoryRouter>{component}</MemoryRouter>
-    </Provider>,
-  );
-};
+import { screen } from "@testing-library/react";
+import { renderWithProvider } from "../renderWithProvider";
 
 it("renders", async () => {
   const mock = new MockAdapter(axios);

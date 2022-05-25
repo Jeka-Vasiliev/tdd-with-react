@@ -6,3 +6,5 @@ export const bookListSelector = createSelector(
 );
 
 export const termSelector = (state) => state.term;
+
+export const detailSelector = (state) => state.detail;

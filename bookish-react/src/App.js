@@ -1,7 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import { Route, Routes } from "react-router-dom";
 
-import { BooksDetailContainer } from "./BookDetail/BooksDetailContainer";
+import { BookDetailContainer } from "./BookDetail/BookDetailContainer";
 import { BookListContainer } from "./BookList/BookListContainer";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       </Typography>
       <Routes>
         <Route index element={<BookListContainer />} />
-        <Route path="/books/:id" element={<BooksDetailContainer />} />
+        <Route path="/books/:id" element={<BookDetailContainer />} />
       </Routes>
     </div>
   );
