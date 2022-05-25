@@ -19,3 +19,16 @@ export const fetchBooks = () => {
     }
   };
 };
+
+export const fetchBook = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: types.FETCH_BOOK_PENDING });
+    try {
+      const res = await axios.get(`http://localhost:8080/books/${id}`);
+
+      dispatch({ type: types.FETCH_BOOK_SUCCESS, detail: res.data });
+    } catch (error) {
+      dispatch({ type: types.FETCH_BOOK_FAILED, err: error.message });
+    }
+  };
+};
