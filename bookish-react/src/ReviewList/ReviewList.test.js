@@ -27,5 +27,7 @@ describe("ReviewList", () => {
     const reviews = screen.getAllByTestId("review");
 
     expect(reviews.length).toBe(2);
+    expect(reviews[0].innerHTML).toBe("Juntao");
+    expect(reviews[1].innerHTML).toBe("Abruzzi");
   });
 });
