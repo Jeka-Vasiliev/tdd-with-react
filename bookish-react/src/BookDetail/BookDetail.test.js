@@ -42,4 +42,21 @@ describe("BookDetail", () => {
 
     expect(screen.getByTestId("description")).toHaveTextContent(props.book.name);
   });
+
+  it("renders reviews", () => {
+    const props = {
+      book: {
+        name: "Refactoring",
+        description:
+          "Martin Fowler's Refactoring defined core ideas and techniques that hundreds of thousands of developers have used to improve their software.",
+        reviews: [{ name: "Juntao", date: "2018/06/21", content: "Excellent work, really impressed by your efforts" }],
+      },
+    };
+
+    render(<BookDetail {...props} />);
+
+    const reviews = screen.getAllByTestId("review");
+    expect(reviews.length).toBe(1);
+    expect(reviews[0].innerHTML).toEqual("Juntao");
+  });
 });
