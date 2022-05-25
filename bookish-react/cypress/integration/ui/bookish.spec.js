@@ -1,45 +1,7 @@
 /// <reference types="cypress" />
-
 import axios from "axios";
 
-const gotoApp = () => {
-  cy.visit("http://localhost:3000/");
-};
-
-const checkAppTitle = () => {
-  cy.get('h2[data-test="heading"]').contains("Bookish");
-};
-
-const checkBookListWith = (expectation = []) => {
-  cy.get('div[data-test="book-list"]').should("exist");
-  cy.get("div.book-item").should((books) => {
-    expect(books).to.have.length(expectation.length);
-
-    const titles = [...books].map((b) => b.querySelector("h2").innerHTML);
-    expect(titles).to.deep.equal(expectation);
-  });
-};
-
-const checkBookList = () => {
-  checkBookListWith(["Refactoring", "Domain-driven design", "Building Microservices"]);
-};
-
-const gotoNthBookInTheList = (bookNo) => {
-  cy.get("div.book-item").contains("View Details").eq(bookNo).click();
-};
-
-const checkBookDetailWith = (url, title) => {
-  cy.url().should("include", url);
-  cy.get("h2.book-title").contains(title);
-};
-
-const checkBookDetail = () => {
-  checkBookDetailWith("/books/1", "Refactoring");
-};
-
-const performSearch = (term) => {
-  cy.get("[data-testid=search] input").type(term);
-};
+import * as app from "./app";
 
 describe("Bookish application", () => {
   before(async () => {
@@ -60,25 +22,25 @@ describe("Bookish application", () => {
   });
 
   it("Visit the bookish", () => {
-    gotoApp();
-    checkAppTitle();
+    app.gotoApp();
+    app.checkAppTitle();
   });
 
   it("Shows a book list", () => {
-    gotoApp();
-    checkBookList();
+    app.gotoApp();
+    app.checkBookList();
   });
 
   it("Goes to the detail page", () => {
-    gotoApp();
-    gotoNthBookInTheList(0);
-    checkBookDetail();
+    app.gotoApp();
+    app.gotoNthBookInTheList(0);
+    app.checkBookDetail();
   });
 
   it("Searches for a title", () => {
-    gotoApp();
-    checkBookListWith(["Refactoring", "Domain-driven design", "Building Microservices"]);
-    performSearch("design");
-    checkBookListWith(["Domain-driven design"]);
+    app.gotoApp();
+    app.checkBookListWith(["Refactoring", "Domain-driven design", "Building Microservices"]);
+    app.performSearch("design");
+    app.checkBookListWith(["Domain-driven design"]);
   });
 });
