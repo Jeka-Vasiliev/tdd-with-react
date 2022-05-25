@@ -18,10 +18,10 @@ describe("Store", () => {
     axios.get = jest.fn().mockImplementation(() => Promise.resolve({ data: books }));
     store.dispatch(actions.setSearchTerm("domain"));
 
-    // await store.dispatch(actions.fetchBooks());
+    await store.dispatch(actions.fetchBooks());
 
     const state = store.getState();
     expect(state.term).toEqual("domain");
-    // expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/books?q=domain");
+    expect(axios.get).toHaveBeenCalledWith("http://localhost:8080/books?q=domain");
   });
 });
